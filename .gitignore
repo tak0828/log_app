@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+
+# Django
+*.log
+staticfiles/
+media/
+
+# Environment variables
+.env
+
+# VSCode
+.vscode/
+
+# PyCharm
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+*.pid
+*.seed
+*.bak
+
+# Python build artifacts
+*.egg-info/
+dist/
+build/
+
+# Local settings
+local_settings.py

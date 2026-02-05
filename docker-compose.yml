@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+  db:
+    image: mariadb:11
+    container_name: logapp_db
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: logdb
+      MYSQL_USER: loguser
+      MYSQL_PASSWORD: logpass
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+      - "3308:3306"
+
+  web:
+    build: ./web
+    container_name: logapp_web
+    command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - ./web:/app
+    ports:
+      - "9000:8000"
+    depends_on:
+      - db
+
+volumes:
+  db_data:
