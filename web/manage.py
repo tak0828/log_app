@@ -3,6 +3,15 @@
 import os
 import sys
 
+# PyMySQLをMySQLdbとして使用（Djangoの設定読み込み前に実行）
+try:
+    import pymysql
+    # Django 6.0のバージョンチェックに対応
+    pymysql.version_info = (2, 2, 1, "final", 0)
+    pymysql.install_as_MySQLdb()
+except ImportError:
+    pass
+
 
 def main():
     """Run administrative tasks."""

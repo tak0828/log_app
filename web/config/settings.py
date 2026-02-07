@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'app',
 ]
 
 MIDDLEWARE = [
@@ -54,7 +55,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -72,12 +73,40 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+# ローカル環境とDocker環境でMySQLの接続先を切り替え
+import os
+IS_DOCKER = os.environ.get('IS_DOCKER', 'false').lower() == 'true'
+
+if IS_DOCKER:
+    # Docker環境内から接続（サービス名で接続）
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'logdb',
+            'USER': 'loguser',
+            'PASSWORD': 'logpass',
+            'HOST': 'db',
+            'PORT': '3306',
+            'OPTIONS': {
+                'charset': 'utf8mb4'
+            }
+        }
     }
-}
+else:
+    # ローカル環境から接続（localhostのポート3308経由）
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'logdb',
+            'USER': 'loguser',
+            'PASSWORD': 'logpass',
+            'HOST': 'localhost',
+            'PORT': '3308',
+            'OPTIONS': {
+                'charset': 'utf8mb4'
+            }
+        }
+    }
 
 
 # Password validation
@@ -102,9 +131,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ja'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tokyo'
 
 USE_I18N = True
 
@@ -115,3 +144,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+# カスタムUserモデルを使用
+AUTH_USER_MODEL = 'app.CustomUser'
+
+# ログイン設定
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/login/'

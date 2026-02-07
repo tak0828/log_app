@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>ログ管理システム</title>
+    <link rel="stylesheet" href="{% static 'app/css/index.css' %}">
+</head>
+<body>
+    <div class="header">
+        <h1>ログ管理システム</h1>
+        <div class="user-info">
+            <span>ようこそ、{{ user.username }}さん</span>
+            <a href="{% url 'logout' %}" class="logout-btn">ログアウト</a>
+        </div>
+    </div>
+
+    <div class="content">
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="{{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <textarea name="text" rows="3" placeholder="ログを入力してください" required></textarea>
+            </div>
+            <button type="submit">追加</button>
+        </form>
+
+        <h2>ログ一覧</h2>
+        {% if logs %}
+            <ul>
+                {% for log in logs %}
+                    <li>
+                        <span class="log-date">{{ log.date }}</span>
+                        {{ log.text }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>ログがありません。</p>
+        {% endif %}
+    </div>
+</body>
+</html>
