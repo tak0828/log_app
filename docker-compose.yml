@@ -17,11 +17,16 @@ services:
   web:
     build: ./web
     container_name: logapp_web
-    command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    command: >
+      python -m debugpy --listen 0.0.0.0:6666 --wait-for-client manage.py runserver 0.0.0.0:9000
+    environment:
+      - IS_DOCKER=true
+      - DJANGO_SETTINGS_MODULE=config.settings
     volumes:
       - ./web:/app
     ports:
       - "9000:8000"
+      - "6666:5678"
     depends_on:
       - db
 
