@@ -19,6 +19,13 @@ class CustomUser(AbstractUser):
 
 
 class Log(models.Model):
+    user = models.ForeignKey(
+        CustomUser,
+        on_delete=models.CASCADE,
+        related_name='logs',
+        null=True,
+        blank=True,
+    )
     date = models.DateTimeField(auto_now_add=True)
     text = models.TextField()
 

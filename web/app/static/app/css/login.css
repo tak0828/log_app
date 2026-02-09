@@ -59,6 +59,20 @@ button:hover {
     margin-bottom: 20px;
 }
 
+.form-link {
+    margin-top: 16px;
+    text-align: center;
+}
+
+.form-link a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.form-link a:hover {
+    text-decoration: underline;
+}
+
 .error {
     color: #dc3545;
     background-color: #f8d7da;
