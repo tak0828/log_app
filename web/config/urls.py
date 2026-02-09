@@ -10,6 +10,9 @@ urlpatterns = [
     path('login/', views.login_view, name='login'),
     path('signup/', views.signup_view, name='signup'),
     path('logout/', views.logout_view, name='logout'),
+    path('activity/', views.activity_view, name='activity'),
+    path('csv/', views.csv_view, name='csv'),
+    path('csv/download/', views.csv_download, name='csv_download'),
     path('admin/', admin.site.urls),
 ]
 

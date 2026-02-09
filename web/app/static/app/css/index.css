@@ -15,12 +15,82 @@ body {
     background-color: white;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.header-right {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
 }
 
 .user-info {
     display: flex;
     align-items: center;
     gap: 15px;
+}
+
+.menu-toggle {
+    display: none;
+}
+
+.menu-wrap {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 50;
+}
+
+.burger {
+    width: 36px;
+    height: 28px;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.burger span {
+    display: block;
+    height: 4px;
+    background-color: #333;
+    border-radius: 2px;
+}
+
+.menu-panel {
+    position: absolute;
+    top: 34px;
+    right: 0;
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    padding: 10px 12px;
+    min-width: 200px;
+    display: none;
+    z-index: 10;
+}
+
+.menu-panel a {
+    display: block;
+    padding: 8px 6px;
+    color: #333;
+    text-decoration: none;
+}
+
+.menu-panel a:hover {
+    background-color: #f1f3f5;
+    border-radius: 6px;
+}
+
+.menu-toggle:checked ~ .menu-panel {
+    display: block;
 }
 
 .logout-btn {
@@ -76,29 +146,90 @@ button[type="submit"]:hover {
     background-color: #0056b3;
 }
 
+.download-btn {
+    display: inline-block;
+    padding: 10px 18px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+.download-btn:hover {
+    background-color: #0056b3;
+}
+
 h2 {
     color: #333;
     margin-top: 30px;
     margin-bottom: 15px;
 }
 
-ul {
-    list-style: none;
-    padding: 0;
+.list-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 30px;
+    margin-bottom: 15px;
 }
 
-li {
+.list-header h2 {
+    margin: 0;
+}
+
+.sort-links {
+    display: flex;
+    gap: 12px;
+    font-size: 14px;
+}
+
+.sort-links a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.sort-links a.active {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.log-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+.log-table thead th {
+    text-align: left;
     padding: 12px;
-    margin-bottom: 10px;
-    background-color: #f8f9fa;
-    border-left: 4px solid #007bff;
-    border-radius: 4px;
+    background-color: #f1f3f5;
+    color: #333;
+    font-weight: bold;
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.log-table tbody td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    vertical-align: top;
+}
+
+.log-table tbody tr:last-child td {
+    border-bottom: none;
 }
 
 .log-date {
     font-weight: bold;
     color: #666;
-    margin-right: 10px;
+    white-space: nowrap;
+}
+
+.col-date {
+    width: 200px;
 }
 
 .messages {

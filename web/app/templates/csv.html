@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>CSVダウンロード</title>
+    <link rel="stylesheet" href="{% static 'app/css/index.css' %}">
+</head>
+<body>
+    <div class="header">
+        <div class="header-left">
+            <h1>CSVダウンロード</h1>
+        </div>
+        <div class="header-right">
+            <div class="user-info">
+                <span>ようこそ、{{ user.username }}さん</span>
+                <a href="{% url 'logout' %}" class="logout-btn">ログアウト</a>
+            </div>
+            <div class="menu-wrap">
+                <input type="checkbox" id="menu-toggle" class="menu-toggle">
+                <label for="menu-toggle" class="burger" aria-label="メニューを開く">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </label>
+                <nav class="menu-panel">
+                    <a href="{% url 'index' %}">ログ一覧</a>
+                    <a href="{% url 'activity' %}">活動推移</a>
+                    <a href="{% url 'csv' %}">CSVダウンロード</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <h2>CSVダウンロード</h2>
+        <p>ログ一覧をCSV形式でダウンロードできます。</p>
+        <a class="download-btn" href="{% url 'csv_download' %}">CSVをダウンロード</a>
+    </div>
+</body>
+</html>
